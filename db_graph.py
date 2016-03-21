@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 
 from gh.connect import Connect
-import gh
 
 from GephiStreamer import Node, Edge, GephiStreamerManager
 
-from random import choice
 
 def display_graph(t, nodes, edges):
 
-    if nodes != None:
+    if nodes is not None:
         print "*** Graphing Nodes"
         for n in nodes:
             node_temp = Node(n._id)
@@ -22,7 +20,7 @@ def display_graph(t, nodes, edges):
             node_temp.property["label"] = node_temp.property["name"]
             t.add_node(node_temp)
 
-    if edges != None:
+    if edges is not None:
         print "*** Graphing Edges"
         for e in edges:
             src = e._outV
@@ -32,13 +30,15 @@ def display_graph(t, nodes, edges):
             properties = e.map()
             for key in properties:
                 edge_temp.property[key] = properties[key]
-            
+
             t.add_edge(edge_temp)
 
+    print t
     t.commit()
 
+
 def display_graph_from_list(t, l=None):
-    if l == None:
+    if l is None:
         return
 
     for element in l:
@@ -74,5 +74,3 @@ if __name__ == "__main__":
     edges = g.E
 
     display_graph(t, g.V, g.E)
-
-    
